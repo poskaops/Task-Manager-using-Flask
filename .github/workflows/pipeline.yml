@@ -128,7 +128,6 @@ jobs:
       - name: Remove previous container
         run: |
           PORT_CONTAINERS=$(docker ps --filter "publish=5000" -q)
-          echo "Portas do Container estão OK!"
           if [ -n "$PORT_CONTAINERS" ]; then
           docker stop $PORT_CONTAINERS
           docker rm $PORT_CONTAINERS
