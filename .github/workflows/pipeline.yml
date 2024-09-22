@@ -1,3 +1,4 @@
+
 name: pipeline
 on:
   push:
@@ -98,12 +99,10 @@ jobs:
         run: |
           docker run -d -p 5000:5000 --name flask-container flask-app
           sleep 10
-
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.10.0
         with:
           target: "http://localhost:5000"
-          artifact_name: "zap_report.html
 
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v3
@@ -128,12 +127,12 @@ jobs:
       - name: Remove previous container
         run: |
           PORT_CONTAINERS=$(docker ps --filter "publish=5000" -q)
+          echo $PORT_CONTAINERS
           if [ -n "$PORT_CONTAINERS" ]; then
           docker stop $PORT_CONTAINERS
           docker rm $PORT_CONTAINERS
           sleep 5
           fi
-
       - name: Deploy the app
         run: |
           echo "Deploy feito com sucesso!!!"
